@@ -1,3 +1,4 @@
+
 const siteContent = {
   "nav": {
     "nav-item-1": "Services",
@@ -38,6 +39,27 @@ const siteContent = {
 };
 
 // Example: Update the img src for the logo
-let logo = document.getElementById("logo-img");
-logo.setAttribute('src', siteContent["nav"]["img-src"])
+// let logo = document.getElementById("logo-img");
+// logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+// create a mapping between DOM elements and contents
+// each element of the array has this form:
+// ['querySelector', 'contentType', 'section', 'item']
+
+const domMap = [
+  ['header nav a:nth-child(1)', 'textContent', 'nav', 'nav-item-1'],
+  ['header nav a:nth-child(2)', 'textContent', 'nav', 'nav-item-2'],
+  ['header nav a:nth-child(3)', 'textContent', 'nav', 'nav-item-3'],
+  ['header nav a:nth-child(4)', 'textContent', 'nav', 'nav-item-4'],
+  ['header nav a:nth-child(5)', 'textContent', 'nav', 'nav-item-5'],
+  ['header nav a:nth-child(6)', 'textContent', 'nav', 'nav-item-6'],
+  ['#logo-img', 'src', 'nav', 'img-src'],
+];
+
+
+
+domMap.forEach(entry => {
+  [qs, type, section, item] = entry;
+  document.querySelector(qs)[type] = siteContent[section][item];
+});
 
