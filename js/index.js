@@ -10,7 +10,7 @@ const siteContent = {
     "img-src": "img/logo.png"
   },
   "cta": {
-    "h1": "DOM Is Awesome",
+    "h1": "DOM<br>Is<br>Awesome",
     "button": "Get Started",
     "img-src": "img/header-img.png"
   },
@@ -38,11 +38,10 @@ const siteContent = {
   },
 };
 
-// Example: Update the img src for the logo
-// let logo = document.getElementById("logo-img");
-// logo.setAttribute('src', siteContent["nav"]["img-src"])
 
-// create a mapping between DOM elements and contents
+// Tasks 1 and 2:
+
+// create a mapping between DOM elements and siteContent object
 // each element of the array has this form:
 // ['querySelector', 'contentType', 'section', 'item']
 
@@ -54,7 +53,7 @@ const domMap = [
   ['header nav a:nth-child(5)', 'textContent', 'nav', 'nav-item-5'],
   ['header nav a:nth-child(6)', 'textContent', 'nav', 'nav-item-6'],
   ['#logo-img', 'src', 'nav', 'img-src'],
-  ['.cta .cta-text h1', 'textContent', 'cta', 'h1'],
+  ['.cta .cta-text h1', 'innerHTML', 'cta', 'h1'],
   ['.cta .cta-text button', 'textContent', 'cta', 'button'],
   ['.cta img', 'src', 'cta', 'img-src'],
   ['.top-content .text-content:nth-child(1) h4', 'textContent', 'main-content', 'features-h4'],
@@ -81,4 +80,16 @@ domMap.forEach(entry => {
   [qs, type, section, item] = entry;
   document.querySelector(qs)[type] = siteContent[section][item];
 });
+
+
+// let's add a little bit of formatting to get that address text to wrap better...
+const contact = document.querySelector('.contact');
+contact.style.width = '200px';
+
+// only way to fix the CTA header was to change the HTML :(
+
+
+// Task 3: add some stype and add some content
+
+
 
