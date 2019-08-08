@@ -1,3 +1,4 @@
+
 const siteContent = {
   "nav": {
     "nav-item-1": "Services",
@@ -9,7 +10,7 @@ const siteContent = {
     "img-src": "img/logo.png"
   },
   "cta": {
-    "h1": "DOM Is Awesome",
+    "h1": "DOM<br>Is<br>Awesome",
     "button": "Get Started",
     "img-src": "img/header-img.png"
   },
@@ -37,6 +38,75 @@ const siteContent = {
   },
 };
 
-// Example: Update the img src for the logo
-let logo = document.getElementById("logo-img");
-logo.setAttribute('src', siteContent["nav"]["img-src"])
+
+// Tasks 1 and 2:
+
+// create a mapping between DOM elements and siteContent object
+// each element of the array has this form:
+// ['querySelector', 'contentType', 'section', 'item']
+
+const domMap = [
+  ['header nav a:nth-child(1)', 'textContent', 'nav', 'nav-item-1'],
+  ['header nav a:nth-child(2)', 'textContent', 'nav', 'nav-item-2'],
+  ['header nav a:nth-child(3)', 'textContent', 'nav', 'nav-item-3'],
+  ['header nav a:nth-child(4)', 'textContent', 'nav', 'nav-item-4'],
+  ['header nav a:nth-child(5)', 'textContent', 'nav', 'nav-item-5'],
+  ['header nav a:nth-child(6)', 'textContent', 'nav', 'nav-item-6'],
+  ['#logo-img', 'src', 'nav', 'img-src'],
+  ['.cta .cta-text h1', 'innerHTML', 'cta', 'h1'],
+  ['.cta .cta-text button', 'textContent', 'cta', 'button'],
+  ['.cta img', 'src', 'cta', 'img-src'],
+  ['.top-content .text-content:nth-child(1) h4', 'textContent', 'main-content', 'features-h4'],
+  ['.top-content .text-content:nth-child(1) p', 'textContent', 'main-content', 'features-content'],
+  ['.top-content .text-content:nth-child(2) h4', 'textContent', 'main-content', 'about-h4'],
+  ['.top-content .text-content:nth-child(2) p', 'textContent', 'main-content', 'about-content'],
+  ['#middle-img', 'src', 'main-content', 'middle-img-src'],
+  ['.bottom-content .text-content:nth-child(1) h4', 'textContent', 'main-content', 'services-h4'],
+  ['.bottom-content .text-content:nth-child(1) p', 'textContent', 'main-content', 'services-content'],
+  ['.bottom-content .text-content:nth-child(2) h4', 'textContent', 'main-content', 'product-h4'],
+  ['.bottom-content .text-content:nth-child(2) p', 'textContent', 'main-content', 'product-content'],
+  ['.bottom-content .text-content:nth-child(3) h4', 'textContent', 'main-content', 'vision-h4'],
+  ['.bottom-content .text-content:nth-child(3) p', 'textContent', 'main-content', 'vision-content'],
+  ['.contact h4', 'textContent', 'contact', 'contact-h4'],
+  ['.contact p:nth-child(2)', 'textContent', 'contact', 'address'],
+  ['.contact p:nth-child(3)', 'textContent', 'contact', 'phone'],
+  ['.contact p:nth-child(4)', 'textContent', 'contact', 'email'],
+  ['footer p', 'textContent', 'footer', 'copyright'],
+];
+
+
+
+domMap.forEach(entry => {
+  [qs, type, section, item] = entry;
+  document.querySelector(qs)[type] = siteContent[section][item];
+});
+
+
+// let's add a little bit of formatting to get that address text to wrap better...
+const contact = document.querySelector('.contact');
+contact.style.width = '200px';
+
+// only way to fix the CTA header was to change the HTML :(
+
+
+// Task 3: add some styles and add some content
+// add some items to the navigation bar
+
+const navBar = document.querySelector('header nav');
+
+const homeNav = document.createElement('a');
+homeNav.textContent = 'Home';
+homeNav.href = '#';
+navBar.prepend(homeNav);
+
+const siteMapNav = document.createElement('a');
+siteMapNav.textContent = 'Site Map';
+siteMapNav.href = '#';
+navBar.appendChild(siteMapNav);
+
+// make navigation text green
+const navItems = Array.from(document.querySelectorAll('header nav a'));
+navItems.forEach(e => e.style.color = 'green');
+
+
+
