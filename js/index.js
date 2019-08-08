@@ -89,7 +89,24 @@ contact.style.width = '200px';
 // only way to fix the CTA header was to change the HTML :(
 
 
-// Task 3: add some stype and add some content
+// Task 3: add some styles and add some content
+// add some items to the navigation bar
+
+const navBar = document.querySelector('header nav');
+
+const homeNav = document.createElement('a');
+homeNav.textContent = 'Home';
+homeNav.href = '#';
+navBar.prepend(homeNav);
+
+const siteMapNav = document.createElement('a');
+siteMapNav.textContent = 'Site Map';
+siteMapNav.href = '#';
+navBar.appendChild(siteMapNav);
+
+// make navigation text green
+const navItems = Array.from(document.querySelectorAll('header nav a'));
+navItems.forEach(e => e.style.color = 'green');
 
 
 
